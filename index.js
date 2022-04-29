@@ -5,13 +5,13 @@ const cors = require("cors");
 app.use(cors());
 const axios = require("axios");
 const fs = require("fs");
-let response = [];
 
 app.get("/", async (req, res, next) => {
   try {
+    let response = [];
     let result = await axios.get("http://time.com");
     let arr1 = result.data.match(/<div class="dek">([\s\S]*?)div>/g);
-    for (let i = 0; i < arr1.length; i++) {
+    for (let i = 0; i < 3; i++) {
       let temp = {
         title: arr1[i]
           .match(/<h3 class="title no-eyebrow">(.*)h3>/g)[0]
@@ -30,7 +30,7 @@ app.get("/", async (req, res, next) => {
     let arr2 = result.data.match(
       /<a class="most-popular-feed__item-section"([\s\S]*?)div>/g
     );
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       let temp = {
         title: arr2[i]
           .match(/<h3 class="most-popular-feed__item-headline">(.*)h3>/g)[0]
